@@ -1,0 +1,11 @@
+{
+    "port": 4000,
+    "domain": "test",
+    "serverName": "test-server",
+    "wiMonitorUrl" : "http://localhost:3001",
+    "time": {
+        "monitorCpu": 1000,
+        "monitorMemory": 1000,
+        "monitorProcess": 1000
+    }
+}

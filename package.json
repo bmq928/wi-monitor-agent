@@ -1,0 +1,25 @@
+{
+  "name": "wi-monitor-agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "export NODE_ENV=test &&  jest ./src",
+    "dev" : "export NODE_ENV=development && nodemon ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "config": "^2.0.1",
+    "cors": "^2.8.4",
+    "execa": "^1.0.0",
+    "express": "^4.16.3",
+    "os-utils": "0.0.14"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.4"
+  }
+}
