@@ -34,11 +34,11 @@ const request =async (sensor, time) => {
             domain,
             serverName
         }
-        const { response } = await axios.post(sensor.url, bodyRequest)
-        console.log(response.status)
+        const response  = await axios.post(sensor.url, bodyRequest)
+        console.log(response.data)
     } catch (e) {
-        console.log('err')
-        console.log(e.response)
+        
+        console.log(e)
     }
 }
 
