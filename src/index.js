@@ -18,8 +18,8 @@ async function main() {
     const app = await server.init()
     const times = config.get('time')
 
-    // if('monitorCpu' in times) request(monitorCpu, times.monitorCpu)
-    // if('monitorMemory' in times) request(monitorMemory, times.monitorMemory)
+    if('monitorCpu' in times) request(monitorCpu, times.monitorCpu)
+    if('monitorMemory' in times) request(monitorMemory, times.monitorMemory)
     if('monitorProcess' in times) request(monitorProcess, times.monitorProcess)
     
     

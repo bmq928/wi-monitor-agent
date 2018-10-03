@@ -1,45 +1,45 @@
 const config = require('config')
 const axios = require('axios')
+const winston = require('winston')
 
 const domain = config.get('domain')
 const serverName = config.get('serverName')
 
 
-const request =async (sensor, time) => {
-    // setInterval(async () => {
+const request = (sensor, time) => {
 
-    //     try {
-    //         const sensorData = await sensor.poll()
-    //         const bodyRequest = {
-    //             ...sensorData,
-    //             domain,
-    //             serverName
-    //         }
-    //         const { response } = await axios.post(sensor.url, bodyRequest)
-    //         console.log(response.status)
-    //     } catch(e) {
-    //         console.log('err')
-    //         console.log(e)
-    //     }
+    const logger = winston.createLogger({
+        transports: [
+            new winston.transports.File({ filename: sensor.logs })
+        ]
+    })
 
 
-    // }, time)
+    setInterval(async () => {
 
-
-
-    try {
-        const sensorData = await sensor.poll()
-        const bodyRequest = {
-            ...sensorData,
-            domain,
-            serverName
+        try {
+            const sensorData = await sensor.poll()
+            const bodyRequest = {
+                ...sensorData,
+                domain,
+                serverName
+            }
+            const response = await axios.post(sensor.url, bodyRequest)
+            // const response = await axios.post('http://localhost:3001/monitor-process/insert-data', {
+            //     df: 'df'
+            // })
+            
+            logger.info(`${new Date()}-${response.status}-${response.statusText}-${response.data.message}`)
+        } catch ({ response }) {
+            // console.log((e.response.data))
+            logger.error(`${new Date()}-${response.status}-${response.statusText}-${response.data}`)
         }
-        const response  = await axios.post(sensor.url, bodyRequest)
-        console.log(response.data)
-    } catch (e) {
-        
-        console.log(e)
-    }
+
+    }, time)
+
+
+
+
 }
 
 module.exports = request
